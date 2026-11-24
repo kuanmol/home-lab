@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Tracker</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">⛩ Anime Tracker</div>
+    <span class="tagline">Your personal anime universe</span>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <div>
+            <p class="eyebrow">WELCOME, OTAKU!</p>
+            <h1>Your Anime Journey</h1>
+            <p>Keep track of every adventure, one episode at a time.</p>
+        </div>
+        <div class="hero-icon">🍥</div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <span>Total Anime</span>
+            <h2 id="totalCount">0</h2>
+        </div>
+        <div class="stat-card">
+            <span>Watching</span>
+            <h2 id="watchingCount">0</h2>
+        </div>
+        <div class="stat-card">
+            <span>Completed</span>
+            <h2 id="completedCount">0</h2>
+        </div>
+        <div class="stat-card">
+            <span>Watchlist</span>
+            <h2 id="plannedCount">0</h2>
+        </div>
+    </section>
+
+    <section class="content-section">
+
+        <div class="section-heading">
+            <div>
+                <h2>My Anime Collection</h2>
+                <p>Manage your favourite anime.</p>
+            </div>
+            <button class="primary-btn" onclick="openModal()">
+                + Add Anime
+            </button>
+        </div>
+
+        <div class="filters">
+            <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search anime..."
+            >
+
+            <select id="statusFilter">
+                <option value="ALL">All Anime</option>
+                <option value="WATCHING">Watching</option>
+                <option value="COMPLETED">Completed</option>
+                <option value="PLAN_TO_WATCH">Plan to Watch</option>
+            </select>
+        </div>
+
+        <div id="animeList" class="anime-grid">
+            <p class="empty-message">Loading your anime collection...</p>
+        </div>
+
+    </section>
+</main>
+
+<!-- Add/Edit Modal -->
+<div id="animeModal" class="modal">
+    <div class="modal-content">
+
+        <div class="modal-heading">
+            <h2 id="modalTitle">Add New Anime</h2>
+            <button class="close-btn" onclick="closeModal()">×</button>
+        </div>
+
+        <form id="animeForm">
+
+            <input type="hidden" id="animeId">
+
+            <label>Anime Title</label>
+            <input type="text" id="title" placeholder="e.g. One Piece" required>
+
+            <label>Genre</label>
+            <input type="text" id="genre" placeholder="Action, Adventure" required>
+
+            <label>Total Episodes</label>
+            <input type="number" id="episodes" min="0" required>
+
+            <label>Your Rating (0-10)</label>
+            <input type="number" id="rating" min="0" max="10" step="0.1" required>
+
+            <label>Status</label>
+            <select id="status">
+                <option value="PLAN_TO_WATCH">Plan to Watch</option>
+                <option value="WATCHING">Watching</option>
+                <option value="COMPLETED">Completed</option>
+            </select>
+
+            <button type="submit" class="primary-btn full-width">
+                Save Anime
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
