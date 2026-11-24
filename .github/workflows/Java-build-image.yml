@@ -30,6 +30,7 @@ jobs:
           cache: maven
 
       - name: Build and Test
+        working-directory: anime-tracker
         run: ./mvnw -B clean verify
 
       - name: Generate Image Tag
