@@ -5,11 +5,11 @@ name: Build Anime Tracker Image
 on:
   pull_request:
     branches:
-      - main
+      - master
 
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -38,7 +38,7 @@ jobs:
         run: |
           DATE=$(date -u +'%Y-%m-%d')
           SHA=$(git rev-parse --short HEAD)
-          echo "tag=main-${DATE}-${SHA}" >> "$GITHUB_OUTPUT"
+          echo "tag=master-${DATE}-${SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
         if: github.event_name == 'push'
