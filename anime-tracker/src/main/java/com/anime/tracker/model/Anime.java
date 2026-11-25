@@ -1,22 +1,38 @@
-
 package com.anime.tracker.model;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 public class Anime {
 
     private Long id;
+
+    @NotBlank(message = "Anime title cannot be empty")
+    @Size(max = 100, message = "Anime title cannot exceed 100 characters")
     private String title;
+
+    @NotBlank(message = "Genre cannot be empty")
     private String genre;
+
+    @PositiveOrZero(message = "Episodes cannot be negative")
     private int episodes;
-    private double rating;
+
+    @NotNull(message = "Rating is required")
+    @Min(value = 0, message = "Rating must be at least 0")
+    @Max(value = 10, message = "Rating cannot exceed 10")
+    private Double rating;
+
+    @NotBlank(message = "Status cannot be empty")
     private String status;
 
-    // Default constructor
     public Anime() {
     }
 
-    // Parameterized constructor
-    public Anime(Long id, String title, String genre,
-                 int episodes, double rating, String status) {
+    public Anime(Long id, String title, String genre, int episodes, Double rating, String status) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -24,8 +40,6 @@ public class Anime {
         this.rating = rating;
         this.status = status;
     }
-
-    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -59,11 +73,11 @@ public class Anime {
         this.episodes = episodes;
     }
 
-    public double getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
