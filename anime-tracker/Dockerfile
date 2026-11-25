@@ -7,14 +7,13 @@ WORKDIR /app
 COPY pom.xml .
 
 # Download dependencies
-RUN mvn dependency:go-offline
+RUN mvn -B -ntp dependency:go-offline
 
 # Copy application source
 COPY src ./src
 
 # Build Spring Boot JAR
-RUN mvn clean package -DskipTests
-
+RUN mvn -B -ntp clean package -DskipTests
 
 # Stage 2: Run the application
 FROM eclipse-temurin:25-jre
