@@ -1,5 +1,4 @@
 
-
 name: Build Anime Tracker Image
 
 on:
@@ -42,7 +41,6 @@ jobs:
           echo "tag=master-${DATE}-${SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
-        if: github.event_name == 'push'
         uses: docker/setup-buildx-action@v4
 
       - name: Login to Docker Hub
@@ -55,7 +53,7 @@ jobs:
       - name: Build and Push Image
         uses: docker/build-push-action@v7
         with:
-          context: .
+          context: ./anime-tracker
           push: ${{ github.event_name == 'push' }}
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/anime-tracker:${{ steps.tag.outputs.tag || 'pr-test' }}
 
