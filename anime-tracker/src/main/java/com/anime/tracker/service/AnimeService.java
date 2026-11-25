@@ -1,6 +1,9 @@
+
 package com.anime.tracker.service;
 
 import com.anime.tracker.model.Anime;
+import com.anime.tracker.exception.AnimeNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,20 +32,17 @@ public class AnimeService {
 
     // READ BY ID
     public Anime getAnimeById(Long id) {
+
         return animeList.stream()
                 .filter(anime -> anime.getId().equals(id))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new AnimeNotFoundException(id));
     }
 
     // UPDATE
     public Anime updateAnime(Long id, Anime updatedAnime) {
 
         Anime existingAnime = getAnimeById(id);
-
-        if (existingAnime == null) {
-            return null;
-        }
 
         existingAnime.setTitle(updatedAnime.getTitle());
         existingAnime.setGenre(updatedAnime.getGenre());
@@ -54,7 +54,10 @@ public class AnimeService {
     }
 
     // DELETE
-    public boolean deleteAnime(Long id) {
-        return animeList.removeIf(anime -> anime.getId().equals(id));
+    public void deleteAnime(Long id) {
+
+        Anime anime = getAnimeById(id);
+
+        animeList.remove(anime);
     }
 }
